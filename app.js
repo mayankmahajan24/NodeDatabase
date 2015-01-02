@@ -29,6 +29,7 @@ mongoose.connect('mongodb://127.0.0.1/mydb');
 var connection = mongoose.connection;
 mongoose.model('gente', {name: String, age: String}, 'people');
 
+
 app.get('/people/:agenum', function (req, res){
 
     mongoose.model('gente').find({age: req.params.agenum}, function(err, results){
@@ -43,12 +44,12 @@ app.get('/add', function (req, res){
 app.get('/submit', function (req, res){
     doc = {name:req.query.name, age: req.query.age};
     connection.collection('people').insert(doc, function (err){
-        res.send(err);
+        //res.send(err);
     });
     res.render('submit', {name: req.query.name, age: req.query.age});
 });
 
-//app.use('/', index);
+app.use('/', routes);
 //app.use('/users', users);
 
 
